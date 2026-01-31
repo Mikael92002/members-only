@@ -3,15 +3,43 @@ const LocalStrategy = require("passport-local");
 const bcrypt = require("bcryptjs");
 const pool = require("../db/pool");
 
-session({
-  store: new pgSession({
-    pool: pool,
-    createTableIfMissing: true,
+passport.use(
+  new LocalStrategy(async (username, password, done) => {
+    try {
+      console.log(username);
+      const { rows } = await pool.query(
+        "SELECT * FROM users WHERE username = $1",
+        [username],
+      );
+      const user = rows[0];
+
+      if (!user) {
+        return done(null, false, { message: "Incorrect username" });
+      }
+      const match = await bcrypt.compare(password, user.password);
+      if (!match) {
+        return done(null, false, { message: "Incorrect password" });
+      }
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
   }),
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 60 * 60 * 24 * 1000,
-  },
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [
+      id,
+    ]);
+    const user = rows[0];
+
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
 });
