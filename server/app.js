@@ -1,8 +1,8 @@
 const express = require("express");
 const path = require("node:path");
-const signUpRoute = require("./routes/signUpRoute");
-const logInRoute = require("./routes/logInRoute");
+const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
+const messagesRoute =  require("./routes/messageRoute");
 const session = require("express-session");
 const pgSession = require("connect-pg-simple")(session);
 const pool = require("./db/pool");
@@ -32,9 +32,9 @@ require("./middleware/auth");
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/api/signUp", signUpRoute);
-app.use("/api/logIn", logInRoute);
+app.use("/api", authRoute);
 app.use("/api/user", userRoute);
+app.use("/api/messages", messagesRoute);
 app.get("/api", (req, res) => {
   res.json({ hello: "Hello world" });
 });

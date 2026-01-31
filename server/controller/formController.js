@@ -1,5 +1,12 @@
-const bcrypt = require("bcryptjs");
 const queries = require("../db/query");
+const passport = require("passport");
+const bcrypt = require("bcryptjs");
+
+// validate:
+exports.logInPost = passport.authenticate("local", {
+  successRedirect: "/success",
+  failureRedirect: "/failure",
+});
 
 // must validate:
 exports.signUpPost = async (req, res) => {

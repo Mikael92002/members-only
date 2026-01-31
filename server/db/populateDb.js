@@ -26,7 +26,9 @@ INSERT INTO users(username, is_member, password)
 VALUES('mikky', FALSE, '${hashedPassword}');
 
 INSERT INTO messages(user_id, message)
-VALUES(1, 'Testing testing 123');
+VALUES
+(1, 'Testing testing 123'),
+(1, 'waka waka ay ay');
 `;
     return SQL;
   } catch (err) {

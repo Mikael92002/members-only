@@ -3,6 +3,7 @@ const LocalStrategy = require("passport-local");
 const bcrypt = require("bcryptjs");
 const pool = require("../db/pool");
 
+// validate:
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
