@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router";
+
 const LogIn = () => {
+    const navigate = useNavigate();
   return (
     <>
       <form action="/api/logIn" method="POST" onSubmit={(e) => handleSubmit(e)}>
@@ -32,6 +35,9 @@ const LogIn = () => {
       if (postLogInResponse.ok) {
         console.log("successful post");
         console.log(postLogInResponse);
+        if(postLogInResponse.url.endsWith("/success")){
+            navigate("/home");
+        }
       }
     } catch (e) {
       console.error(e);

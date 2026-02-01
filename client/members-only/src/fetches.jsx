@@ -3,6 +3,7 @@ export async function userFetch() {
     const response = await fetch("/api/user");
     if (response.ok) {
       const data = await response.json();
+      console.log("returning user")
       return data;
     }
   } catch (err) {
@@ -15,6 +16,7 @@ export async function messagesFetch() {
         const response = await fetch("/api/messages");
         if(response.ok){
             const data = await response.json();
+            console.log("returning messages")
             return data;
         }
     }catch(e){

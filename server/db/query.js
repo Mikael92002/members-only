@@ -1,4 +1,4 @@
-const pool = require("./pool")
+const pool = require("./pool");
 
 exports.addMember = async (username, password) => {
   const query = await pool.query(
@@ -9,6 +9,8 @@ exports.addMember = async (username, password) => {
 };
 
 exports.getAllMessages = async () => {
-  const rows = await pool.query("SELECT * FROM messages");
+  const rows = await pool.query(
+    "SELECT username, is_member, messages.message, messages.id FROM users INNER JOIN messages ON users.id = messages.user_id",
+  );
   return rows;
 };

@@ -37,7 +37,14 @@ body {
 
 }
 
+.message_container{
+    border: 1px solid red;
+    margin: 10px 0px;
+}
 
+.message_username{
+    border: 1px solid red
+}
 
 @keyframes fadeScaleIn {
     0% {
