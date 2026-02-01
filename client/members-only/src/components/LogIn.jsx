@@ -1,9 +1,22 @@
 import { useNavigate } from "react-router";
+import Header from "./Header";
+import { useEffect } from "react";
+import { userFetch } from "../fetches";
 
 const LogIn = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  useEffect(() => {
+    async function is_signed_in() {
+      const userFetchResults = await userFetch();
+      if (userFetchResults.user) {
+        navigate("/home");
+      }
+    }
+    is_signed_in();
+  }, [navigate]);
   return (
     <>
+      <Header></Header>
       <form action="/api/logIn" method="POST" onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="username">
           Username:
@@ -25,7 +38,7 @@ const LogIn = () => {
     let dataAsObjects = Object.fromEntries(formData);
 
     try {
-      const postLogInResponse = await fetch("/api/logIn", {
+      const postLogInResponse = await fetch("/api/auth/logIn", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,8 +48,8 @@ const LogIn = () => {
       if (postLogInResponse.ok) {
         console.log("successful post");
         console.log(postLogInResponse);
-        if(postLogInResponse.url.endsWith("/success")){
-            navigate("/home");
+        if (postLogInResponse.url.endsWith("/success")) {
+          navigate("/home");
         }
       }
     } catch (e) {

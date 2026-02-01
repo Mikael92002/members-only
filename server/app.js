@@ -32,7 +32,7 @@ require("./middleware/auth");
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/api", authRoute);
+app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/messages", messagesRoute);
 app.get("/api", (req, res) => {

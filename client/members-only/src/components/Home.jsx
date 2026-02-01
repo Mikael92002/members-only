@@ -1,14 +1,16 @@
 import styles from "../css/Home.module.css";
-import suit from "../assets/suit.png";
 import { useEffect } from "react";
 import { useState } from "react";
-import { messagesFetch, userFetch } from "../fetches";
+import { messagesFetch, userFetch, signOut } from "../fetches";
+import Header from "./Header";
+import { useNavigate } from "react-router";
 
 const Home = () => {
   const [user, setUser] = useState({});
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const messageArray = messages.messages;
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchUserAndMessages() {
@@ -21,16 +23,19 @@ const Home = () => {
     fetchUserAndMessages();
   }, []);
 
+  async function signOutFetch() {
+    const signOutSuccess = await signOut();
+    if (signOutSuccess) {
+      navigate("/");
+    }
+  }
+
   if (loading) {
     return <>LOADING</>;
   } else if (Object.keys(user).length > 0) {
     return (
       <>
-        <h1 className={styles.title}>
-          <span>MIDNIGHT</span>{" "}
-          <img src={suit} alt="" className={styles.title_pic} />{" "}
-          <span>WHISPERS</span>
-        </h1>
+        <Header></Header> <button onClick={() => signOutFetch()}>Sign out</button>
         <div className={styles.messages_container}></div>
         {messageArray.length > 0 && (
           <>
@@ -51,7 +56,8 @@ const Home = () => {
         <button onClick={() => console.log(user.user.username)}>
           click for user
         </button>
-        <button onClick={() => console.log(messages)}>click messages</button>
+        <button onClick={() => console.log(messages)}>click for messages</button>
+        
       </>
     );
   } else {

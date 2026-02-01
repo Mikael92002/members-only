@@ -3,7 +3,7 @@ export async function userFetch() {
     const response = await fetch("/api/user");
     if (response.ok) {
       const data = await response.json();
-      console.log("returning user")
+      console.log("returning user");
       return data;
     }
   } catch (err) {
@@ -12,14 +12,25 @@ export async function userFetch() {
 }
 
 export async function messagesFetch() {
-    try{
-        const response = await fetch("/api/messages");
-        if(response.ok){
-            const data = await response.json();
-            console.log("returning messages")
-            return data;
-        }
-    }catch(e){
-        console.error(e);
+  try {
+    const response = await fetch("/api/messages");
+    if (response.ok) {
+      const data = await response.json();
+      console.log("returning messages");
+      return data;
     }
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function signOut() {
+  try {
+    const response = await fetch("api/auth/signOut");
+    if (response.ok) {
+      return true;
+    } else return false;
+  } catch (e) {
+    console.error(e);
+  }
 }

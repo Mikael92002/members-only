@@ -19,3 +19,12 @@ exports.signUpPost = async (req, res) => {
     return next(err);
   }
 };
+
+exports.signOutGet = (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.end();
+  });
+};
