@@ -33,10 +33,15 @@ body {
     animation: fadeScaleIn 1.5s 0.25s ease-in-out 1 both
 }
 
+.welcome{
+    text-align: center;
+}
+
 .sign_out {
     background-color: red;
     color: white;
     font-weight: 900;
+    margin: 0px 5px;
 }
 
 

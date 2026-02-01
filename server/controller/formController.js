@@ -9,10 +9,10 @@ exports.logInPost = passport.authenticate("local", {
 });
 
 // must validate:
-exports.signUpPost = async (req, res) => {
+exports.signUpPost = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    const hashedPassword = bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
     const query = await queries.addMember(username, hashedPassword);
     res.send(query);
   } catch (err) {

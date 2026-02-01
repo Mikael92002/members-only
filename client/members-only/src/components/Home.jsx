@@ -27,19 +27,25 @@ const Home = () => {
   async function signOutFetch() {
     const signOutSuccess = await signOut();
     if (signOutSuccess) {
-      navigate("/");
+      navigate("/auth");
     }
   }
 
   if (loading) {
     return <>LOADING</>;
-  } else if (Object.keys(user).length > 0) {
+  } else {
     return (
       <>
         <Header></Header>{" "}
-        <button className={styles.sign_out} onClick={() => signOutFetch()}>
-          Sign Out
-        </button>
+        {Object.keys(user).length > 0 && (
+          <h3 className={styles.welcome}>
+            Welcome back, {user.user.username}... Click
+            <button className={styles.sign_out} onClick={() => signOutFetch()}>
+            Here
+            </button>
+            to sign out
+          </h3>
+        )}
         <div className={styles.messages_container}></div>
         {messageArray.length > 0 && (
           <MessageArray messageArray={messageArray}></MessageArray>
@@ -52,8 +58,6 @@ const Home = () => {
         </button>
       </>
     );
-  } else {
-    return <ErrorPage />;
   }
 };
 

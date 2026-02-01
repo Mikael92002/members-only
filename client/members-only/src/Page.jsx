@@ -1,4 +1,4 @@
-import LogIn from "./components/LogIn";
+import Auth from "./components/Auth";
 import { useParams } from "react-router";
 import ErrorPage from "./ErrorPage";
 import Home from "./components/Home";
@@ -7,12 +7,12 @@ function Page() {
   const { currPage } = useParams();
   return (
     <>
-      {currPage === "home" ? (
+      {currPage === undefined ? (
         <>
           <Home></Home>
         </>
-      ) : currPage === undefined ? (
-        <LogIn></LogIn>
+      ) : currPage === "auth" ? (
+        <Auth></Auth>
       ) : (
         <ErrorPage />
       )}
