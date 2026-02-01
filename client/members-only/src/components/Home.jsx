@@ -4,6 +4,7 @@ import { useState } from "react";
 import { messagesFetch, userFetch, signOut } from "../fetches";
 import Header from "./Header";
 import { useNavigate } from "react-router";
+import MessageArray from "./MessageArray";
 
 const Home = () => {
   const [user, setUser] = useState({});
@@ -35,29 +36,20 @@ const Home = () => {
   } else if (Object.keys(user).length > 0) {
     return (
       <>
-        <Header></Header> <button onClick={() => signOutFetch()}>Sign out</button>
+        <Header></Header>{" "}
+        <button className={styles.sign_out} onClick={() => signOutFetch()}>
+          Sign Out
+        </button>
         <div className={styles.messages_container}></div>
         {messageArray.length > 0 && (
-          <>
-            <div className={styles.message_section}>
-              {messageArray.map((messageItem) => {
-                return (
-                  <li key={messageItem.id} className={styles.message_container}>
-                    <div className={styles.message_username}>
-                      {messageItem.username}
-                    </div>
-                    <div className={styles.message}>{messageItem.message}</div>
-                  </li>
-                );
-              })}
-            </div>
-          </>
+          <MessageArray messageArray={messageArray}></MessageArray>
         )}
         <button onClick={() => console.log(user.user.username)}>
           click for user
         </button>
-        <button onClick={() => console.log(messages)}>click for messages</button>
-        
+        <button onClick={() => console.log(messages)}>
+          click for messages
+        </button>
       </>
     );
   } else {

@@ -19,16 +19,17 @@ CREATE TABLE messages(
 id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 user_id INTEGER,
 message VARCHAR(500),
+message_date TIMESTAMP,
 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
 INSERT INTO users(username, is_member, password)
 VALUES('mikky', FALSE, '${hashedPassword}');
 
-INSERT INTO messages(user_id, message)
+INSERT INTO messages(user_id, message, message_date)
 VALUES
-(1, 'Testing testing 123'),
-(1, 'waka waka ay ay');
+(1, 'Testing testing 123', '2025-01-18 14:30:15'),
+(1, 'waka waka ay ay', '2025-02-01 00:20:00');
 `;
     return SQL;
   } catch (err) {

@@ -33,17 +33,25 @@ body {
     animation: fadeScaleIn 1.5s 0.25s ease-in-out 1 both
 }
 
-.message_section{
-
+.sign_out {
+    background-color: red;
+    color: white;
+    font-weight: 900;
 }
 
-.message_container{
-    border: 1px solid red;
+
+.message_container {
     margin: 10px 0px;
+    padding: 5px;
 }
 
-.message_username{
-    border: 1px solid red
+.message {
+    border: 1px solid red;
+    border-radius: 20px;
+    padding: 10px;
+    color: white;
+    margin-top: 5px;
+    width: fit-content;
 }
 
 @keyframes fadeScaleIn {
@@ -51,22 +59,26 @@ body {
         opacity: 0;
         transform: translateY(50px);
     }
-    50%{
+
+    50% {
         transform: scale(2) translateY(50px);
     }
-    75%{
+
+    75% {
         transform: scale(2)
     }
+
     100% {
         opacity: 1;
     }
 }
 
-@keyframes fadeIn{
-    0%{
+@keyframes fadeIn {
+    0% {
         opacity: 0
     }
-    100%{
+
+    100% {
         opacity: 1;
     }
 }
