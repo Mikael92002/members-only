@@ -15,10 +15,34 @@ exports.getAllMessages = async () => {
   return rows;
 };
 
-exports.insertMessage = async (userID, message, messageDate) => {
+exports.getAllMessagesAnonymous = async () => {
   const rows = await pool.query(
+    "SELECT messages.message, messages.id, messages.message_date FROM users INNER JOIN messages ON users.id = messages.user_id",
+  );
+  return rows;
+};
+
+exports.updateMemberToTrue = async (userID) => {
+  const rows = await pool.query(
+    "UPDATE users SET is_member = TRUE WHERE users.id = $1 RETURNING *",
+    [userID],
+  );
+  return rows;
+};
+
+exports.insertMessage = async (userID, message, messageDate) => {
+  const query = await pool.query(
     "INSERT INTO messages(user_id, message, message_date) VALUES($1, $2, $3) RETURNING *",
     [userID, message, messageDate],
   );
-  return rows;
+  return query;
+};
+
+exports.getUser = async (username) => {
+  const query = await pool.query(
+    "SELECT username FROM users WHERE username = $1",
+    [username],
+  );
+  console.log(query.rows[0]);
+  return query.rows[0];
 };

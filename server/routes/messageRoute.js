@@ -3,6 +3,8 @@ const controller = require("../controller/messageController")
 
 const messageRouter = Router();
 
-messageRouter.get("/", controller.getAllUsers);
+messageRouter.get("/", controller.getAllMessages);
+messageRouter.get("/anonymous", controller.getAllMessagesAnonymous);
+messageRouter.post("/:userID", controller.postMessage);
 
 module.exports = messageRouter

@@ -1,40 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=block');
 
-body {
-    animation: fadeIn 0.5s ease-in 1 both;
+.home_wrapper {
+    animation: fadeIn 1s ease-in 1 both;
+    min-height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.title {
-    font-family: "Bungee", sans-serif;
+* {
+    box-sizing: border-box;
+}
+
+.welcome {
     text-align: center;
-    position: relative;
-    z-index: 9999;
-    text-shadow:
-        2px 0 0 #ffffff,
-        -2px 0 0 #ffffff,
-        0 2px 0 #ffffff,
-        0 -2px 0 #ffffff;
-    font-size: 48px;
+    font-family:'Courier New', Courier, monospace
 }
 
-.title>span {
-    margin: 0px 15px;
+.auth {
+    text-align: center
 }
 
-.title_pic {
-    width: 70px;
-    position: absolute;
-    z-index: -1;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    animation: fadeScaleIn 1.5s 0.25s ease-in-out 1 both
-}
-
-.welcome{
-    text-align: center;
+.auth>button {
+    background-color: red;
+    color: white;
+    font-weight: 900;
 }
 
 .sign_out {
@@ -44,10 +34,16 @@ body {
     margin: 0px 5px;
 }
 
-
 .message_container {
-    margin: 10px 0px;
+    border: 1px solid white;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.message_bubble {
+    margin: 5px 0px;
     padding: 5px;
+
 }
 
 .message {
@@ -59,23 +55,16 @@ body {
     width: fit-content;
 }
 
-@keyframes fadeScaleIn {
-    0% {
-        opacity: 0;
-        transform: translateY(50px);
-    }
+.message_input_form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding-bottom: 25px;
+}
 
-    50% {
-        transform: scale(2) translateY(50px);
-    }
-
-    75% {
-        transform: scale(2)
-    }
-
-    100% {
-        opacity: 1;
-    }
+.message_input {
+    flex-grow: 1;
+    width: 100%;
 }
 
 @keyframes fadeIn {

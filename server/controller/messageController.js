@@ -1,6 +1,17 @@
 const queries = require("../db/query");
 
-exports.getAllUsers = async (req, res) => {
-  const {rows} = await queries.getAllMessages();
+exports.getAllMessages = async (req, res) => {
+  const { rows } = await queries.getAllMessages();
+  res.json({ messages: rows });
+};
+exports.getAllMessagesAnonymous = async (req, res) =>{
+  const {rows} = await queries.getAllMessagesAnonymous();
   res.json({messages: rows});
+}
+exports.postMessage = async (req, res) => {
+  const userID = req.params.userID;
+  const { message, messageDate } = req.body;
+  const { rows } = await queries.insertMessage(userID, message, messageDate);
+  console.log(rows[0]);
+  res.json(rows[0]);
 };

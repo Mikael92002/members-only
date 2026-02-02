@@ -50,13 +50,11 @@ const LogIn = () => {
 
   return (
       <div className={styles.form_container}>
+        <h2>LOG IN:</h2>
         <div className={styles.error}>
           <strong>{errorMessage}</strong>
         </div>
-        <h2>LOG IN:</h2>
         <form
-          action="/api/logIn"
-          method="POST"
           onSubmit={(e) => handleSubmit(e)}
         >
           <label htmlFor="username">

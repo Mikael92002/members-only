@@ -8,9 +8,6 @@ import SignUp from "./SignUp";
 const Auth = () => {
   return (
     <div className={styles.flex_container}>
-      <Link to="/">
-        <Header></Header>
-      </Link>{" "}
       <LogIn></LogIn>
       <SignUp></SignUp>
       <div className={styles.whispers_div}>

@@ -1,13 +1,10 @@
 const Router = require("express");
+const controller = require("../controller/userController")
 
 const userRoute = Router();
 
-userRoute.get("/", (req, res) => {
-  if (req.user) {
-    res.json({ user: req.user });
-  } else {
-    res.json({});
-  }
-});
+userRoute.get("/", controller.getCurrentUserFromCookie);
+
+userRoute.put("/:userID", controller.updateMemberToTrue);
 
 module.exports = userRoute;
