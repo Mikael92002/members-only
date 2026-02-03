@@ -16,7 +16,6 @@ const Home = () => {
   const [user, setUser] = useState({});
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const messageArray = messages.messages;
   const navigate = useNavigate();
   const messageEndRef = useRef(null);
 
@@ -25,13 +24,14 @@ const Home = () => {
     async function fetchUserAndMessages() {
       const userFetchResults = await userFetch();
       setUser(userFetchResults);
-      if (userFetchResults?.user.is_member) {
+      console.log(userFetchResults)
+      if (userFetchResults.user?.is_member) {
         const messagesFetchResults = await messagesFetch();
-        setMessages(messagesFetchResults);
+        setMessages(messagesFetchResults.messages);
         setLoading(false);
       } else {
         const anonymousMessageFetchResults = await anonymousMessagesFetch();
-        setMessages(anonymousMessageFetchResults);
+        setMessages(anonymousMessageFetchResults.messages);
         setLoading(false);
       }
     }
@@ -50,7 +50,7 @@ const Home = () => {
 
   async function handleSetMessages() {
     const messagesFetchResults = await messagesFetch();
-    setMessages(messagesFetchResults);
+    setMessages(messagesFetchResults.messages);
   }
 
   async function signOutFetch() {
@@ -81,9 +81,9 @@ const Home = () => {
             sign up
           </h3>
         )}
-        {messageArray.length > 0 && (
+        {messages.length > 0 && (
           <MessageArray
-            messageArray={messageArray}
+            messageArray={messages}
             messageEndRef={messageEndRef}
           ></MessageArray>
         )}

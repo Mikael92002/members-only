@@ -7,23 +7,24 @@ import SecretCode from "./components/SecretCode";
 
 function Page() {
   const { currPage } = useParams();
+
   return (
     <>
-      {currPage === undefined ? (
-        <>
-          <Header></Header>
-          <Home></Home>
-        </>
-      ) : currPage === "auth" ? (
-        <>
-          <Header></Header>
-          <Auth></Auth>
-        </>
-      ) : currPage === "secret" ? (
-        <SecretCode></SecretCode>
-      ) : (
-        <ErrorPage />
-      )}
+        {currPage === undefined ? (
+          <>
+            <Header></Header>
+            <Home></Home>
+          </>
+        ) : currPage === "auth" ? (
+          <>
+            <Header></Header>
+            <Auth></Auth>
+          </>
+        ) : currPage === "secret" ? (
+          <SecretCode></SecretCode>
+        ) : (
+          <ErrorPage />
+        )}
     </>
   );
 }

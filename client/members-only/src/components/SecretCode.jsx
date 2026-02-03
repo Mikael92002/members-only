@@ -3,7 +3,7 @@ import { updateMemberToTrue, userFetch } from "../fetches";
 
 const SecretCode = () => {
   const [answer, setAnswer] = useState("");
-  const [error, setError] = useState("");
+  const [error, setMessage] = useState("");
 
   async function validateAnswer() {
     const sanitized = answer.trim().toLowerCase();
@@ -13,13 +13,12 @@ const SecretCode = () => {
         currUser.user.id,
       );
       if (updateMemberToTrueFetch) {
-        setError("");
-        console.log("success")
-      }
-      else{
-        console.log("fail")
+        setMessage("That's correct fella!");
+        console.log("success");
+        return;
       }
     }
+    setMessage("Wrong answer amigo");
   }
   return (
     <div>
@@ -27,6 +26,7 @@ const SecretCode = () => {
         To become a member you must answer the following simple equation:
         d/dx(cos(x)+sin(x))
       </div>
+      <div style={{ color: "yellow" }}>{error}</div>
       <input
         type="text"
         name="answer"
@@ -34,6 +34,11 @@ const SecretCode = () => {
         placeholder="Your answer goes here..."
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            validateAnswer();
+          }
+        }}
       />
       <button onClick={() => validateAnswer()}>Submit</button>
     </div>
