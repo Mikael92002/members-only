@@ -3,31 +3,43 @@
 .home_wrapper {
     animation: fadeIn 1s ease-in 1 both;
     min-height: 90%;
+    max-height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-bottom: 0px;
 }
 
 * {
     box-sizing: border-box;
 }
 
-.welcome {
+.loading{
+    border: 16px solid white;
+    border-radius: 50px;
+    width: 90px;
+    height: 90px;
+    margin: 10rem auto;
+    border-top: 16px solid red;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.welcome, .welcome>button {
     text-align: center;
-    font-family:'Courier New', Courier, monospace
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5rem;
 }
 
-.auth {
-    text-align: center
-}
-
-.auth>button {
-    background-color: red;
-    color: white;
-    font-weight: 900;
-}
-
-.sign_out {
+.welcome>button {
     background-color: red;
     color: white;
     font-weight: 900;
@@ -36,15 +48,20 @@
 
 .message_container {
     border: 1px solid white;
-    margin: 0px 10px;
+    margin: 0px 20px;
     flex-grow: 1;
     overflow-y: auto;
+    font-size: 1rem;
 }
 
 .message_bubble {
-    margin: 5px 0px;
+    margin: 5px 50px 5px 10px;
     padding: 5px;
 
+}
+
+.message_username{
+    font-size: 1.4rem;
 }
 
 .message {
@@ -54,18 +71,21 @@
     color: white;
     margin-top: 5px;
     width: fit-content;
+    font-size: 1.25rem;
 }
 
 .message_input_form {
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding-bottom: 25px;
+    padding-right: 20px;
+    padding-left:20px;
 }
 
 .message_input {
     flex-grow: 1;
     width: 100%;
+    font-size: 1.25rem;
 }
 
 @keyframes fadeIn {
@@ -85,5 +105,10 @@
 
     .title_pic {
         width: 40px;
+    }
+
+    .home_wrapper {
+        min-height: 80%;
+        max-height: 80%;
     }
 }

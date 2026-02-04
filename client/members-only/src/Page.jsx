@@ -4,20 +4,34 @@ import ErrorPage from "./ErrorPage";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import SecretCode from "./components/SecretCode";
+import { Link } from "react-router";
+import { UserContext } from "./components/UserContext";
+import { useEffect, useState } from "react";
+import { userFetch } from "./fetches";
 
 function Page() {
   const { currPage } = useParams();
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    async function fetchUser() {
+      const userFetchResults = await userFetch();
+      setUser(userFetchResults);
+    }
+    fetchUser();
+  }, [currPage]);
 
   return (
     <>
+      <UserContext value={user}>
+        <Link to="/">
+          <Header></Header>
+        </Link>
         {currPage === undefined ? (
           <>
-            <Header></Header>
             <Home></Home>
           </>
         ) : currPage === "auth" ? (
           <>
-            <Header></Header>
             <Auth></Auth>
           </>
         ) : currPage === "secret" ? (
@@ -25,6 +39,7 @@ function Page() {
         ) : (
           <ErrorPage />
         )}
+      </UserContext>
     </>
   );
 }

@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { updateMemberToTrue, userFetch } from "../fetches";
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
 
 const SecretCode = () => {
   const [answer, setAnswer] = useState("");
   const [error, setMessage] = useState("");
+  const user = useContext(UserContext);
 
   async function validateAnswer() {
     const sanitized = answer.trim().toLowerCase();
@@ -14,35 +17,56 @@ const SecretCode = () => {
       );
       if (updateMemberToTrueFetch) {
         setMessage("That's correct fella!");
-        console.log("success");
         return;
       }
     }
     setMessage("Wrong answer amigo");
   }
-  return (
-    <div>
+
+  const divStyles = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: "8px",
+  };
+  const buttonStyle = {
+    backgroundColor: "red",
+    color: "white",
+    fontWeight: 900,
+  };
+
+  if (Object.keys(user).length > 0) {
+    return <>You are already a member!</>;
+  } else {
+    return (
       <div>
-        To become a member you must answer the following simple equation:
-        d/dx(cos(x)+sin(x))
+        <h1 style={divStyles}>Congratulations! You found the secret page!</h1>
+        <div style={divStyles}>
+          To become a member (and view other members' names) you must answer the
+          following simple equation: d/dx(cos(x)+sin(x))
+        </div>
+        <div style={{ color: "yellow", textAlign: "center" }}>{error}</div>
+        <div style={divStyles}>
+          <input
+            type="text"
+            name="answer"
+            id="answer"
+            placeholder="Your answer goes here..."
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                validateAnswer();
+              }
+            }}
+          />
+          <button style={buttonStyle} onClick={() => validateAnswer()}>
+            Submit
+          </button>
+        </div>
       </div>
-      <div style={{ color: "yellow" }}>{error}</div>
-      <input
-        type="text"
-        name="answer"
-        id="answer"
-        placeholder="Your answer goes here..."
-        value={answer}
-        onChange={(e) => setAnswer(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            validateAnswer();
-          }
-        }}
-      />
-      <button onClick={() => validateAnswer()}>Submit</button>
-    </div>
-  );
+    );
+  }
 };
 
 export default SecretCode;

@@ -8,9 +8,16 @@ exports.addMember = async (username, password) => {
   return query;
 };
 
-exports.getAllMessages = async () => {
+exports.getAllMessages = async (userID, is_member) => {
   const rows = await pool.query(
-    "SELECT username, is_member, messages.message, messages.id, messages.message_date FROM users INNER JOIN messages ON users.id = messages.user_id",
+    `SELECT is_member, messages.message, messages.id, messages.message_date,
+    CASE
+     WHEN $2 = true THEN users.username
+     WHEN $1 = users.id THEN users.username
+     ELSE 'ANONYMOUS'
+     END AS username
+    FROM users INNER JOIN messages ON users.id = messages.user_id`,
+    [userID, is_member],
   );
   return rows;
 };

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { userFetch } from "../fetches";
 import { useState } from "react";
 import styles from "../css/Form.module.css";
+import { logInFetch } from "../fetches";
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -25,49 +26,55 @@ const LogIn = () => {
     const formData = new FormData(e.target);
     let dataAsObjects = Object.fromEntries(formData);
 
-    try {
-      const postLogInResponse = await fetch("/api/auth/logIn", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataAsObjects),
-      });
-      if (postLogInResponse.ok) {
-        console.log("successful post");
-        console.log(postLogInResponse);
-        if (postLogInResponse.url.endsWith("/success")) {
-          navigate("/");
-          setErrorMessage("");
-        } else if (postLogInResponse.url.endsWith("/failure")) {
-          setErrorMessage("INCORRECT USERNAME OR PASSWORD!");
-        }
-      }
-    } catch (e) {
-      console.error(e);
+    const logIn = await logInFetch(dataAsObjects);
+    if (logIn.url.endsWith("/success")) {
+      navigate("/");
+      setErrorMessage("");
+    } else if (logIn.url.endsWith("/failure")) {
+      setErrorMessage("INCORRECT USERNAME OR PASSWORD!");
     }
+
+    // try {
+    //   const postLogInResponse = await fetch("/api/auth/logIn", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(dataAsObjects),
+    //   });
+    //   if (postLogInResponse.ok) {
+    //     console.log("successful post");
+    //     console.log(postLogInResponse);
+    //     if (postLogInResponse.url.endsWith("/success")) {
+    //       navigate("/");
+    //       setErrorMessage("");
+    //     } else if (postLogInResponse.url.endsWith("/failure")) {
+    //       setErrorMessage("INCORRECT USERNAME OR PASSWORD!");
+    //     }
+    //   }
+    // } catch (e) {
+    //   console.error(e);
+    // }
   }
 
   return (
-      <div className={styles.form_container}>
-        <h2>LOG IN:</h2>
-        <div className={styles.error}>
-          <strong>{errorMessage}</strong>
-        </div>
-        <form
-          onSubmit={(e) => handleSubmit(e)}
-        >
-          <label htmlFor="username">
-            Username:
-            <input type="text" name="username" id="log-username" required />
-          </label>
-          <label htmlFor="password">
-            Password:
-            <input type="password" name="password" id="log-password" required />
-          </label>
-          <button type="submit">Log In</button>
-        </form>
+    <div className={styles.form_container}>
+      <h2>LOG IN:</h2>
+      <div className={styles.error}>
+        <strong>{errorMessage}</strong>
       </div>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <label htmlFor="username">
+          Username:
+          <input type="text" name="username" id="log-username" required />
+        </label>
+        <label htmlFor="password">
+          Password:
+          <input type="password" name="password" id="log-password" required />
+        </label>
+        <button type="submit">Log In</button>
+      </form>
+    </div>
   );
 };
 
