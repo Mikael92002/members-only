@@ -1,0 +1,1 @@
+A project to demonstrate user authentication using passportJS and the Local Strategy
