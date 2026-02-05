@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("node:path");
 const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRoute");
-const messagesRoute =  require("./routes/messageRoute");
+const messagesRoute = require("./routes/messageRoute");
 const session = require("express-session");
 const pgSession = require("connect-pg-simple")(session);
 const pool = require("./db/pool");
@@ -40,9 +40,11 @@ app.get("/api", (req, res) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/dist")));
+  app.use(express.static(path.join(__dirname, "../client/members-only/dist")));
   app.get("/{*splat}", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/dist", "index.html"));
+    res.sendFile(
+      path.join(__dirname, "../client/members-only/dist", "index.html"),
+    );
   });
 }
 
