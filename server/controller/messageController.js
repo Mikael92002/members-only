@@ -2,8 +2,6 @@ const queries = require("../db/query");
 
 exports.getAllMessages = async (req, res) => {
   const { userID, is_member } = req.query;
-  // console.log(userID);
-  // console.log(is_member);
   const { rows } = await queries.getAllMessages(userID, is_member);
   console.log(rows);
   res.json({ messages: rows });
@@ -18,4 +16,9 @@ exports.postMessage = async (req, res) => {
   const { rows } = await queries.insertMessage(userID, message, messageDate);
   console.log(rows[0]);
   res.json(rows[0]);
+};
+exports.deleteMessage = async (req, res) => {
+  const messageID = req.params.messageID;
+  await queries.deleteMessage(messageID);
+  res.status(200).end();
 };

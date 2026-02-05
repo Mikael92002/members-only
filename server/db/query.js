@@ -53,3 +53,7 @@ exports.getUser = async (username) => {
   console.log(query.rows[0]);
   return query.rows[0];
 };
+
+exports.deleteMessage = async (messageID) =>{
+  const query = await pool.query("DELETE FROM messages WHERE messages.id = $1", [messageID]);
+}

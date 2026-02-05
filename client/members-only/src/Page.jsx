@@ -4,7 +4,6 @@ import ErrorPage from "./ErrorPage";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import SecretCode from "./components/SecretCode";
-import { Link } from "react-router";
 import { UserContext } from "./components/UserContext";
 import { useEffect, useState } from "react";
 import { userFetch } from "./fetches";
@@ -23,9 +22,7 @@ function Page() {
   return (
     <>
       <UserContext value={user}>
-        <Link to="/">
-          <Header></Header>
-        </Link>
+        <Header></Header>
         {currPage === undefined ? (
           <>
             <Home></Home>

@@ -19,7 +19,7 @@ const MessageInput = ({ user, handleSetMessages }) => {
     if (postMessageResponse.ok) {
       let message = await postMessageResponse.json();
       message.username = user.username;
-      handleSetMessages(message);
+      handleSetMessages(message, "add");
       setMessageInput("");
     }
   }

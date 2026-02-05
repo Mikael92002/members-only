@@ -116,3 +116,16 @@ export async function postMessageFetch(userID, data) {
     console.error(e);
   }
 }
+
+export async function deleteMessageFetch(messageID) {
+  try {
+    const deleteMessageResponse = await fetch(`/api/messages/${messageID}`, {
+      method: "DELETE",
+    });
+    if(deleteMessageResponse.ok){
+      return deleteMessageResponse;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}

@@ -30,14 +30,14 @@ body {
         0 2px 0 #ffffff,
         0 -2px 0 #ffffff;
     font-size: 48px;
-    animation: fadeIn 1s ease-in 1 both;
     margin: 0;
     padding-top: 60px;
     background-color: red;
 }
 
-.title>span {
-    margin: 0px 15px;
+.title-link {
+    font-size: 48px;
+    animation: fadeIn 0.5s ease-in 1 both;
 }
 
 .title_pic {

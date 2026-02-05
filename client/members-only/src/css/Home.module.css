@@ -55,9 +55,7 @@
 }
 
 .message_bubble {
-    margin: 5px 50px 5px 10px;
     padding: 5px;
-
 }
 
 .message_username{
@@ -72,6 +70,7 @@
     margin-top: 5px;
     width: fit-content;
     font-size: 1.25rem;
+    display: inline-block;
 }
 
 .message_input_form {
@@ -86,6 +85,16 @@
     flex-grow: 1;
     width: 100%;
     font-size: 1.25rem;
+}
+
+.message_bubble_trash{
+    display: flex;
+    align-items: center;
+}
+
+.trash{
+    margin-top: 5px;
+    cursor: pointer;
 }
 
 @keyframes fadeIn {

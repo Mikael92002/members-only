@@ -35,15 +35,16 @@ const SecretCode = () => {
     fontWeight: 900,
   };
 
-  if (Object.keys(user).length > 0) {
+  if (Object.keys(user).length > 0 && user.user.is_member) {
     return <>You are already a member!</>;
   } else {
     return (
       <div>
         <h1 style={divStyles}>Congratulations! You found the secret page!</h1>
         <div style={divStyles}>
-          To become a member (and view other members' names) you must answer the
-          following simple equation: d/dx(cos(x)+sin(x))
+          To become a member, which allows you to see other members' names and
+          delete their messages, you must answer the following simple equation:
+          d/dx(cos(x)+sin(x))
         </div>
         <div style={{ color: "yellow", textAlign: "center" }}>{error}</div>
         <div style={divStyles}>
@@ -68,5 +69,4 @@ const SecretCode = () => {
     );
   }
 };
-
 export default SecretCode;

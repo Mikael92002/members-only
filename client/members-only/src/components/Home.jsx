@@ -42,10 +42,20 @@ const Home = () => {
     }
   }, [messages]);
 
-  async function handleSetMessages(newMessage) {
-    setMessages((prevMessages) => {
-      return [...prevMessages, newMessage];
-    });
+  async function handleSetMessages(newMessage, action) {
+    switch (action) {
+      case "add":
+        setMessages((prevMessages) => {
+          return [...prevMessages, newMessage];
+        });
+        break;
+
+      case "delete":
+        setMessages((prevMessages) => {
+          return prevMessages.filter((message) => message.id !== newMessage.id);
+        });
+        break;
+    }
   }
 
   async function signOutFetch() {
@@ -78,6 +88,7 @@ const Home = () => {
           <MessageArray
             messageArray={messages}
             messageEndRef={messageEndRef}
+            handleSetMessages={handleSetMessages}
           ></MessageArray>
         )}
         {Object.keys(user).length > 0 && (
@@ -86,7 +97,9 @@ const Home = () => {
               user={user.user}
               handleSetMessages={handleSetMessages}
             ></MessageInput>
-            {!user.user.is_member && <SecretFooter is_member={user.user.is_member}></SecretFooter>}
+            {!user.user.is_member && (
+              <SecretFooter is_member={user.user.is_member}></SecretFooter>
+            )}
           </>
         )}
       </div>
