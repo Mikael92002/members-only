@@ -33,28 +33,6 @@ const LogIn = () => {
     } else if (logIn.url.endsWith("/failure")) {
       setErrorMessage("INCORRECT USERNAME OR PASSWORD!");
     }
-
-    // try {
-    //   const postLogInResponse = await fetch("/api/auth/logIn", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(dataAsObjects),
-    //   });
-    //   if (postLogInResponse.ok) {
-    //     console.log("successful post");
-    //     console.log(postLogInResponse);
-    //     if (postLogInResponse.url.endsWith("/success")) {
-    //       navigate("/");
-    //       setErrorMessage("");
-    //     } else if (postLogInResponse.url.endsWith("/failure")) {
-    //       setErrorMessage("INCORRECT USERNAME OR PASSWORD!");
-    //     }
-    //   }
-    // } catch (e) {
-    //   console.error(e);
-    // }
   }
 
   return (

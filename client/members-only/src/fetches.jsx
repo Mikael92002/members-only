@@ -53,7 +53,6 @@ export async function updateMemberToTrue(userID) {
       method: "PUT",
     });
     if (response.ok) {
-      console.log("successfully updated member");
       return true;
     } else return false;
   } catch (e) {
@@ -71,7 +70,6 @@ export async function signUpFetch(data, setErrors) {
       body: JSON.stringify(data),
     });
     if (postSignUpResponse.ok) {
-      console.log("successful sign up");
       setErrors([]);
       return postSignUpResponse;
     } else {

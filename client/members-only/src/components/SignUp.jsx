@@ -12,7 +12,6 @@ const SignUp = () => {
 
     const formData = new FormData(e.target);
     let dataAsObjects = Object.fromEntries(formData);
-    console.log("data being sent: ", dataAsObjects);
 
     const signUp = await signUpFetch(dataAsObjects, setErrors);
     if (signUp.ok) {
@@ -52,8 +51,6 @@ const SignUp = () => {
           <button type="submit">Sign up</button>
         </form>
       </div>
-
-      <button onClick={() => console.log(errors)}>log errors</button>
     </>
   );
 };

@@ -50,7 +50,6 @@ exports.getUser = async (username) => {
     "SELECT username FROM users WHERE username = $1",
     [username],
   );
-  console.log(query.rows[0]);
   return query.rows[0];
 };
 
