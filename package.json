@@ -3,6 +3,6 @@
   "private": true,
   "scripts": {
     "build": "cd client/members-only && npm install && npm run build && cd ../../server && npm install",
-    "start": "cd server && npm start"
+    "start": "cd server && npm run prod"
   }
 }
